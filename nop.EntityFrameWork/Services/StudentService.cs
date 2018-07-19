@@ -13,7 +13,7 @@ namespace nop.EntityFrameWork.Services
         private readonly IDbContext _iDbContext;
         public StudentService()
         {
-            _iDbContext = new ObjectContext("App");
+            _iDbContext = new NopObjectContext("App");
             _iStudentRepository = new EfRepository<Student>(_iDbContext);
 
         }

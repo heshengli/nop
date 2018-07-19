@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Reflection;
@@ -15,11 +16,11 @@ namespace nop.EntityFrameWork
     /// <summary>
     /// Object context
     /// </summary>
-    public class ObjectContext : DbContext, IDbContext
+    public class NopObjectContext : DbContext, IDbContext
     {
         #region Ctor
 
-        public ObjectContext(string nameOrConnectionString)
+        public NopObjectContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
             //是否开启懒加载
@@ -40,6 +41,13 @@ namespace nop.EntityFrameWork
             .Where(type => !String.IsNullOrEmpty(type.Namespace))
             .Where(type => type.BaseType != null && type.BaseType.IsGenericType &&
                 type.BaseType.GetGenericTypeDefinition() == typeof(NopEntityTypeConfiguration<>));
+
+            //ef自带对象
+            //var typesToRegister2 = Assembly.GetExecutingAssembly().GetTypes()
+            //.Where(type => !String.IsNullOrEmpty(type.Namespace))
+            //.Where(type => type.BaseType != null && type.BaseType.IsGenericType &&
+            //type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
+
             foreach (var type in typesToRegister)
             {
                 dynamic configurationInstance = Activator.CreateInstance(type);
