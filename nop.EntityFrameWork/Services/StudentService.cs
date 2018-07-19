@@ -18,7 +18,7 @@ namespace nop.EntityFrameWork.Services
 
         }
 
-        //Autofac ctor
+        //Ioc Autofac 调整
         //public StudentService(IRepository<Student> iStudentRepositpory,IDbContext iDbContext)
         //{
         //    _iDbContext = iDbContext;
