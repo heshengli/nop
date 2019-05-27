@@ -22,13 +22,13 @@ namespace nop.Cache
 
         #region Ctor
 
-        public RedisCacheManager(IRedisConnectionWrapper connectionWrapper)
+        public RedisCacheManager(string connnectionString="127.0.0.1")
         {
-            if (String.IsNullOrEmpty(ConfigurationManager.AppSettings["RedisCachingConnectionString"].ToString()))
+            if (String.IsNullOrEmpty(connnectionString))
                 throw new Exception("Redis connection string is empty");
 
             // ConnectionMultiplexer.Connect should only be called once and shared between callers
-            this._connectionWrapper = connectionWrapper;
+            this._connectionWrapper = new RedisConnectionWrapper(connnectionString);
 
             this._db = _connectionWrapper.GetDatabase();
             this._perRequestCacheManager = new MemoryCacheManager();

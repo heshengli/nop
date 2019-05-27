@@ -10,7 +10,7 @@ namespace nop.Cache.Test
     {
         static void Main(string[] args)
         {
-            //CacheHelper.Insert("name", "张三");
+            CacheHelper.Insert("name", "张三");
             string name = CacheHelper.Get<string>("name");
             Console.WriteLine(name);
             Console.ReadKey();

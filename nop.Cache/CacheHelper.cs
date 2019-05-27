@@ -19,8 +19,7 @@ namespace nop.Cache
             //创建缓存
             if (!string.IsNullOrWhiteSpace(_RedisCachingConnectionString))
             {
-                RedisConnectionWrapper RedisConnectionWrapper = new RedisConnectionWrapper(_RedisCachingConnectionString);
-                _RedisCacheManager = new RedisCacheManager(RedisConnectionWrapper);
+                _RedisCacheManager = new RedisCacheManager(_RedisCachingConnectionString);
             }
         }
 
